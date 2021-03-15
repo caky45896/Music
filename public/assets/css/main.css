@@ -3160,6 +3160,7 @@
 			text-transform: uppercase;
 			font-weight: 700;
 			font-size: .85em;
+			display: inline;
 		}
 
 			#header a:hover {
@@ -3746,11 +3747,11 @@
 		background-color: #e5474b;
 		color: #f2a3a5;
 		padding: 2em 0 2em 0;
-		background: #777777
+		background: #ffffff;
 	}
 
 		#footer input, #footer select, #footer textarea {
-			color: #ffffff;
+			color: #000000;
 		}
 
 		#footer a {
@@ -3762,7 +3763,7 @@
 		}
 
 		#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {
-			color: #fff;
+			color: rgb(0, 0, 0);
 		}
 
 		#footer blockquote {
@@ -3775,7 +3776,7 @@
 		}
 
 		#footer hr {
-			border-bottom-color: #fff;
+			border-bottom-color: rgb(0, 0, 0);
 		}
 
 		#footer input[type="submit"],
@@ -3847,7 +3848,7 @@
 			}
 
 		#footer label {
-			color: #ffffff;
+			color: #000000;
 		}
 
 		#footer input[type="text"],
@@ -3856,7 +3857,7 @@
 		#footer select,
 		#footer textarea {
 			background: none;
-			border-color: rgba(255, 255, 255, 0.25);
+			border-color: rgba(0, 0, 0, 0.25);
 		}
 
 			#footer input[type="text"]:focus,
@@ -3864,8 +3865,8 @@
 			#footer input[type="email"]:focus,
 			#footer select:focus,
 			#footer textarea:focus {
-				border-color: #ffffff;
-				box-shadow: 0 0 0 1px #ffffff;
+				border-color: #747474;
+				box-shadow: 0 0 0 1px #555555;
 			}
 
 		#footer .select-wrapper:before {
@@ -3938,7 +3939,7 @@
 		}
 
 			#footer .copyright a {
-				color: #ffffff;
+				color: #000000;
 			}
 
 		@media screen and (max-width: 980px) {

@@ -1,3 +1,4 @@
+<!-- 首頁 -->
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -11,11 +12,10 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="logo">Home</a>
+					<a href="{:url('/')}" class="logo">Home</a>
 					<nav id="nav">
-						<a href="index.html">{:__('Home')}</a>
-						<a href="generic.html">待修改</a>
-						<a href="elements.html">{:__('About')}</a>
+						<a href="{:url('/')}">{:__('Home')}</a>
+						<a href="{:url('elements/index')}">{:__('About')}</a>
 					</nav>
 				</div>
 			</header>
@@ -25,26 +25,53 @@
 			<section id="banner">
 				<div class="inner">
 					<h1>{:__('CompanyName')}</h1>
-                    <!-- <h3><div id="Date"></div></h3> -->
-					<ul class="actions">
-						<li><a href="#" class="button alt">Get Started</a></li>
-					</ul>
 				</div>
 			</section>
 
-		<!-- One -->
-			<section id="one">
-				<div class="inner">
-					<header>
-						<!-- <h2>{:__('CompanyName')}</h2> -->
-					</header>
-					<h3>title</h3><p>text</p>
-					<ul class="actions">
-						<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
-					</ul>
-				</div>
-			</section>
-
+		<!-- Three -->
+		<section id="three">
+			<div class="inner">
+				<article>
+					<div class="content" style="text-align: center;">
+						<!-- <span class="icon fa-laptop"></span> -->
+						<img src="__CDN__/assets/img/img_10.png" alt="" />
+						<header>
+							<h4>接口申請</h4>
+						</header>
+						<p>接口申請</p>
+						<ul class="actions">
+							<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
+						</ul>
+					</div>
+				</article>
+				<article>
+					<div class="content" style="text-align: center;">
+						<!-- <span class="icon fa-diamond"></span> -->
+						<img src="__CDN__/assets/img/img_12.png" alt="" />
+						<header>
+							<h4>二維碼支付</h4>
+						</header>
+						<p>二維碼支付</p>
+						<ul class="actions">
+							<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
+						</ul>
+					</div>
+				</article>
+				<article>
+				<div class="content" style="text-align: center;">
+						<!-- <span class="icon fa-laptop"></span> -->
+						<img src="__CDN__/assets/img/img_11.png" alt="" />
+						<header>
+							<h4>商戶系統管理</h4>
+						</header>
+						<p>商戶系統管理</p>
+						<ul class="actions">
+							<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
+						</ul>
+					</div>
+				</article>
+			</div>
+		</section>
 		<!-- Two -->
 			<section id="two">
 				<div class="inner">
@@ -61,6 +88,7 @@
 								在變革快速的環境下一同增長技術與創意想法。</p>
 						</div>
 					</article>
+					
 					<article class="alt">
 						<div class="content" style="text-align: center;">
 							<header>
@@ -75,84 +103,22 @@
 				</div>
 			</section>
 
-		<!-- Three -->
-			<section id="three">
-				<div class="inner">
-					<article>
-						<div class="content" style="text-align: center;">
-							<!-- <span class="icon fa-laptop"></span> -->
-							<img src="__CDN__/assets/img/img_10.png" alt="" />
-							<header>
-								<h4>接口申請</h4>
-							</header>
-							<p>接口申請</p>
-							<ul class="actions">
-								<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
-							</ul>
-						</div>
-					</article>
-					<article>
-						<div class="content" style="text-align: center;">
-							<!-- <span class="icon fa-diamond"></span> -->
-							<img src="__CDN__/assets/img/img_12.png" alt="" />
-							<header>
-								<h4>二維碼支付</h4>
-							</header>
-							<p>二維碼支付</p>
-							<ul class="actions">
-								<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
-							</ul>
-						</div>
-					</article>
-					<article>
-					<div class="content" style="text-align: center;">
-							<!-- <span class="icon fa-laptop"></span> -->
-							<img src="__CDN__/assets/img/img_11.png" alt="" />
-							<header>
-								<h4>商戶系統管理</h4>
-							</header>
-							<p>商戶系統管理</p>
-							<ul class="actions">
-								<!-- <li><a href="#" class="button alt">Learn More</a></li> -->
-							</ul>
-						</div>
-					</article>
-				</div>
-			</section>
-
-		<!-- Footer -->
-			<section id="footer">
-				<div class="inner">
-					<header>
-						<h2>{:__('GetinTouch')}</h2>
-					</header>
-					<form method="post" action="#">
-						<div class="field half first">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="field half">
-							<label for="email">Email</label>
-							<input type="text" name="email" id="email" />
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="4"></textarea>
-						</div>
-						<ul class="actions">
-							<li><input type="submit" value="Send Message" class="alt" /></li>
-						</ul>
-					</form>
-					<div class="copyright">
+			<!-- 底下 -->
+					<div class="copyright" style="text-align: center;">
 						<h6>&copy; 2021 <a href="#">{:__('CompanyName')}</a></h6>
 					</div>
 				</div>
 			</section>
 
 		<!-- Scripts -->
+			<script src="__CDN__/assets/libs/jquery/dist/jquery.min.js"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
 			<script src="__CDN__/assets/js/jquery.min.js"></script>
-			<script src="__CDN__/assets/js/skel.min.js"></script>
+			<script src="__CDN__/assets/js/browser.min.js"></script>
+			<script src="__CDN__/assets/js/breakpoints.min.js"></script>
 			<script src="__CDN__/assets/js/util.js"></script>
 			<script src="__CDN__/assets/js/main.js"></script>
+			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+			
 	</body>
 </html>

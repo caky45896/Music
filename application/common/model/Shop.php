@@ -5,13 +5,13 @@ namespace app\common\model;
 use think\Model;
 
 
-class Shop extends Model
+class apiTest extends Model
 {
 
     // 數據庫
     protected $connection = 'database';
     // 表名
-    protected $name = 'shop';
+    protected $name = 'api_test';
     
     // 自动写入时间戳字段
     protected $autoWriteTimestamp = 'int';
