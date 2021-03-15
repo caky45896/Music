@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{:__('CompanyName')}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="__CDN__/assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="{:url('/')}" class="logo">About</a>
+					<nav id="nav">
+						<a href="{:url('/')}">{:__('Home')}</a>
+						<a href="{:url('music/index')}">Music</a>
+						<a href="{:url('about/index')}">{:__('About')}</a>
+					</nav>
+				</div>
+			</header>
+			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<header class="major special" >
+                        <h1>辦公室點歌系統</h1>
+					</header>
+                    <div class="collapse" id="collapse_chatroom">
+                        <div class="card-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">用戶暱稱</span>
+                                </div>
+                                <input type="text" class="form-control" id="chatroom_name" placeholder="您的暱稱"/>
+                            </div>
+                            <div class="imessage" id="chatroom_imessage"></div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="chatroom_msg" placeholder="請輸入您的訊息"/>
+                                <span class="input-group-append">
+                                    <button class="btn btn-info" type="button" onclick="sendMsg();">送出</button>
+    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+				</div>                
+	
+
+
+			<!-- Scripts -->
+			<script src="__CDN__/assets/libs/jquery/dist/jquery.min.js"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
+			<script src="__CDN__/assets/js/jquery.min.js"></script>
+			<script src="__CDN__/assets/js/browser.min.js"></script>
+			<script src="__CDN__/assets/js/breakpoints.min.js"></script>
+			<script src="__CDN__/assets/js/util.js"></script>
+			<script src="__CDN__/assets/js/main.js"></script>
+			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	</body>
+</html>
