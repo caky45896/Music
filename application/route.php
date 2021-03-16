@@ -10,6 +10,9 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+use think\Route;
+Route::get('about', 'about/index');
+Route::get('music', 'music/index');
 return [
     //别名配置,别名只能是映射到控制器且访问时必须加上请求的方法
     '__alias__'   => [

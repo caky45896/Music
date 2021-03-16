@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'Homestead',
+    'name' => 'My Website',
     'beian' => '',
     'cdnurl' => '',
     'version' => '1.0.1',

@@ -16,6 +16,8 @@
 						<a href="{:url('/')}">{:__('Home')}</a>
 						<a href="{:url('music/index')}">Music</a>
 						<a href="{:url('about/index')}">{:__('About')}</a>
+						<a href="{:url('user/index')}">{:__('User center')}</a>
+
 					</nav>
 				</div>
 			</header>
@@ -27,35 +29,33 @@
 					<header class="major special">
 						<h1>關於我們</h1>
 						<h3>智匯網路科技有限公司</h3><p>{$getText}</p>
-						
 					</header>
+					<hr>
 				</div>
-		
+				
 		<!-- Footer -->
 			<section id="footer">
 				<div class="inner">
 					<header>
 						<h2>{:__('GetinTouch')}</h2>
 					</header>
-					<from>
 						<div class="field half first">
 							<label for="name">Name</label>
-							<input type="text" name="name" id="name" autocomplete="off"/>
+							<input type="text"  id="name" autocomplete="off"/>
 						</div>
 						<div class="field half">
 							<label for="email">Email</label>
-							<input type="text" name="email" id="email" autocomplete="off"/>
+							<input type="text"  id="email" autocomplete="off"/>
 						</div>
 						<div class="field">
 							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="4" autocomplete="off"></textarea>
+							<textarea  id="message" rows="4" autocomplete="off"></textarea>
 						</div>
 						<br>
 						<ul class="actions">
 							<button id="apibutton">Send Message</button>
 						</ul>
 						<hr>
-					</from>
 					<!-- 底下 -->
 					<div class="copyright">
 						<h6>&copy; 2021 <a href="#">{:__('CompanyName')}</a></h6>
@@ -71,7 +71,7 @@
 			<script src="__CDN__/assets/js/browser.min.js"></script>
 			<script src="__CDN__/assets/js/breakpoints.min.js"></script>
 			<script src="__CDN__/assets/js/util.js"></script>
-			<script src="__CDN__/assets/js/main.js"></script>
+			<!-- <script src="__CDN__/assets/js/main.js"></script> -->
 			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 			<!-- 彈出視窗js -->
@@ -113,11 +113,11 @@
 					}else if($("#email").val() == ""){
 						toastr.warning("請確認信箱欄位");
 					}else if( $("#message").val() == ""){
-						toastr.warning("請確認備註欄位");
+						toastr.warning("請確認訊息欄位");
 					}else{
 						$.ajax({
 							type: "POST", //方法
-							url: '__CDN__/api/ApiTest/getApitest',
+							url: 'api/Email/EmailAdd',
 							data: {
 								'name': $("#name").val(),
 								'email': $("#email").val(),
@@ -125,9 +125,7 @@
 							},
 							success: function (){
 								toastr.success("成功");
-								document.getElementById('name').value='';
-								document.getElementById('email').value='';
-								document.getElementById('message').value='';
+								setTimeout("window.location.reload()",3000);
 							},
 							error : function(){
 								toastr.error("失敗");
