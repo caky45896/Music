@@ -12,6 +12,7 @@ use think\Cookie;
 use think\Hook;
 use think\Session;
 use think\Validate;
+use think\Log;
 
 /**
  * 会员中心
@@ -122,7 +123,8 @@ class User extends Frontend
                 $this->error(__($validate->getError()), null, ['token' => $this->request->token()]);
             }
             if ($this->auth->register($username, $password, $email, $mobile)) {
-                $this->success(__('Sign up successful'), $url ? $url : url('user/index'));
+
+                $this->success(__('Sign up successful'), url('/'));
             } else {
                 $this->error($this->auth->getError(), null, ['token' => $this->request->token()]);
             }
@@ -133,6 +135,7 @@ class User extends Frontend
             && !preg_match("/(user\/login|user\/register|user\/logout)/i", $referer)) {
             $url = $referer;
         }
+
         $this->view->assign('captchaType', config('fastadmin.user_register_captcha'));
         $this->view->assign('url', $url);
         $this->view->assign('title', __('Register'));
@@ -165,19 +168,22 @@ class User extends Frontend
                 'password.require' => 'Password can not be empty',
                 'password.length'  => 'Password must be 6 to 30 characters',
             ];
+
             $data = [
                 'account'   => $account,
                 'password'  => $password,
                 '__token__' => $token,
             ];
+
             $validate = new Validate($rule, $msg);
-            $result = $validate->check($data);
+            $result = $validate->check($data); 
+
             if (!$result) {
                 $this->error(__($validate->getError()), null, ['token' => $this->request->token()]);
                 return false;
             }
             if ($this->auth->login($account, $password)) {
-                $this->success(__('Logged in successful'), $url ? $url : url('user/index'));
+                $this->success(__('Logged in successful'), '/');
             } else {
                 $this->error($this->auth->getError(), null, ['token' => $this->request->token()]);
             }
@@ -302,6 +308,7 @@ class User extends Frontend
                 $v['fullurl'] = ($v['storage'] == 'local' ? $cdnurl : $this->view->config['upload']['cdnurl']) . $v['url'];
             }
             unset($v);
+            Log::info('1111');
             $result = array("total" => $total, "rows" => $list);
 
             return json($result);

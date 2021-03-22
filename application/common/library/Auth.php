@@ -11,6 +11,7 @@ use think\Exception;
 use think\Hook;
 use think\Request;
 use think\Validate;
+use think\Log;
 
 class Auth
 {

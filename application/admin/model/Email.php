@@ -25,4 +25,8 @@ class Email extends Model
 
     ];
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4b9c27688925dfb50b26dfeab5f01ebf82916ee9

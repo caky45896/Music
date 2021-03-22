@@ -5,10 +5,25 @@ namespace app\admin\controller;
 use app\common\controller\Backend;
 
 
+<<<<<<< HEAD
 
 class Email extends Backend
 {
 
+=======
+/**
+ * 管理员日志管理
+ *
+ * @icon fa fa-circle-o
+ */
+class Email extends Backend
+{
+
+    /**
+     * AdminLog模型对象
+     * @var \app\admin\model\Email
+     */
+>>>>>>> 4b9c27688925dfb50b26dfeab5f01ebf82916ee9
     protected $model = null;
 
     public function _initialize()

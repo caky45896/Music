@@ -28,25 +28,18 @@
 					<header class="major special" >
                         <h1>辦公室點歌系統</h1>
 					</header>
-                    <div class="collapse" id="collapse_chatroom">
-                        <div class="card-body">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">用戶暱稱</span>
-                                </div>
-                                <input type="text" class="form-control" id="chatroom_name" placeholder="您的暱稱"/>
-                            </div>
-                            <div class="imessage" id="chatroom_imessage"></div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="chatroom_msg" placeholder="請輸入您的訊息"/>
-                                <span class="input-group-append">
-                                    <button class="btn btn-info" type="button" onclick="sendMsg();">送出</button>
-    
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-				</div>                
+					<!-- 暫時使用 房間清單-->
+						<div class="card mb-4">
+							<div class="card-header">Header</div>
+							<div class="card-body playlist">
+								<ul class="list-group list-group-flush" id="history"></ul>
+								{foreach name="list" id="row"}
+								<li class="list-group-item">{$row.title}</li><p>創建者: {$row.name}</p>
+								{/foreach}
+							</div>
+						</div>
+				</div>
+			</section>
 	
 
 
@@ -60,4 +53,21 @@
 			<script src="__CDN__/assets/js/main.js"></script>
 			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 	</body>
+	<script>
+	function setHistory(sHistory) {
+            $("#history").html("");
+            var oHistory = JSON.parse(sHistory);
+            var index = Math.floor(Math.random() * Object.keys(oHistory).length);
+            for (const [key, value] of Object.entries(oHistory)) {
+                var title1 = value.title;
+                if (title1.length > 43) {
+                    title1 = title1.slice(0, 40) + '...';
+                }
+                $("#history").append('<li class="list-group-item">' +
+                    '<button class="btn btn-info" type="button" onclick="add(\'' + value.id + '\',\'' + value.title + '\')">點播</button>\n' +
+                    '<button class="btn btn-warning" type="button" onclick="interstitial(\'' + value.id + '\',\'' + value.title + '\')">插播</button> - ' +
+                    title1 + '</li>');
+            }
+        }
+	</script>
 </html>
