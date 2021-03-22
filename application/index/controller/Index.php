@@ -19,6 +19,7 @@ class Index extends Frontend
         // $getlist = $Shoplist->where($Shoplist)->select();
 
         // $this->view->assign("getlist", $getlist);
+
         return $this->view->fetch();
     }
 

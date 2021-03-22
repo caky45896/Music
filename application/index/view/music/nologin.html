@@ -26,20 +26,14 @@
 			<section id="main">
 				<div class="inner">
 					<header class="major special" >
-                        <h1>辦公室點歌系統</h1>
 					</header>
-					<!-- 暫時使用 房間清單-->
-						<div class="card mb-4">
-							<div class="card-header">Header</div>
-							<div class="card-body playlist">
-								<ul class="list-group list-group-flush" id="history"></ul>
-								{foreach name="list" id="row"}
-								<li class="list-group-item">{$row.title}</li><p>創建者: {$row.name}</p>
-								{/foreach}
-							</div>
-						</div>
-				</div>
-			</section>
+					<div>
+						<h3>您尚未登入, 請先登入！</h3>
+						<ul class="actions">
+							<li><a href="{:url('user/login')}" class="button alt">登入</a></li>
+						</ul>
+					</div>
+				</div>                
 	
 
 
@@ -53,21 +47,4 @@
 			<script src="__CDN__/assets/js/main.js"></script>
 			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 	</body>
-	<script>
-	function setHistory(sHistory) {
-            $("#history").html("");
-            var oHistory = JSON.parse(sHistory);
-            var index = Math.floor(Math.random() * Object.keys(oHistory).length);
-            for (const [key, value] of Object.entries(oHistory)) {
-                var title1 = value.title;
-                if (title1.length > 43) {
-                    title1 = title1.slice(0, 40) + '...';
-                }
-                $("#history").append('<li class="list-group-item">' +
-                    '<button class="btn btn-info" type="button" onclick="add(\'' + value.id + '\',\'' + value.title + '\')">點播</button>\n' +
-                    '<button class="btn btn-warning" type="button" onclick="interstitial(\'' + value.id + '\',\'' + value.title + '\')">插播</button> - ' +
-                    title1 + '</li>');
-            }
-        }
-	</script>
 </html>
