@@ -27,14 +27,24 @@
 				<div class="inner">
 					<header class="major special" >
                         <h1>辦公室點歌系統</h1>
+						<button id="add">建立點歌房</button>
+						<h3>備註</h3>
+						<h6><span>刪除(尚未有功能)</span></h6>
+						<h6><span>建立點歌房(尚未有功能)</span></h6>
 					</header>
 					<!-- 暫時使用 房間清單-->
 						<div class="card mb-4">
-							<div class="card-header">Header</div>
 							<div class="card-body playlist">
 								<ul class="list-group list-group-flush" id="history"></ul>
 								{foreach name="list" id="row"}
-								<li class="list-group-item">{$row.title}</li><p>創建者: {$row.name}</p>
+								<div id="musicList">
+									<div class="field half first">
+										<h4><p id="musicTitle">{$row.title}</p></h4>
+										<span>創建者: {$row.name}</span>
+										<button id="del" onclick="delMusic()">刪除</button>
+									</div>
+								</div>
+								<br>
 								{/foreach}
 							</div>
 						</div>
@@ -46,11 +56,11 @@
 			<!-- Scripts -->
 			<script src="__CDN__/assets/libs/jquery/dist/jquery.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
-			<script src="__CDN__/assets/js/jquery.min.js"></script>
+			<!-- <script src="__CDN__/assets/js/jquery.min.js"></script> -->
 			<script src="__CDN__/assets/js/browser.min.js"></script>
 			<script src="__CDN__/assets/js/breakpoints.min.js"></script>
-			<script src="__CDN__/assets/js/util.js"></script>
-			<script src="__CDN__/assets/js/main.js"></script>
+			<!-- <script src="__CDN__/assets/js/util.js"></script> -->
+			<!-- <script src="__CDN__/assets/js/main.js"></script> -->
 			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 	</body>
 	<script>
@@ -70,4 +80,5 @@
             }
         }
 	</script>
+
 </html>

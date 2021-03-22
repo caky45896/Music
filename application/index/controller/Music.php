@@ -29,12 +29,14 @@ class Music extends Frontend
         return $this->view->fetch();
     }
 
+    // 尚未登入的頁面
     public function nologin()
     {
 
         return $this->view->fetch();
     }
 
+    // 顯示現有的房間
     public function MusicHouse(){
         $Houselist = new \app\common\model\MusicHouse(); 
 

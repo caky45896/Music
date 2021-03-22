@@ -3957,3 +3957,11 @@
 			}
 
 		}
+
+/* 自訂css */
+		#musicList{
+			background-color: rgb(161, 161, 161);
+			width: 400px;
+			color: #000000;
+			
+		}
