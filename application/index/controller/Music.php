@@ -23,10 +23,14 @@ class Music extends Frontend
         Log::info('Login Status: ');
         Log::info($this->auth->isLogin());
 
+        $checklogin = $this->auth->isLogin();
+        $this->view->assign("checklogin", $checklogin);
+        
         if($this->auth->isLogin() == true){
             Log::info('成功登入');
-            $user_id = $this->auth->username;
-            $this->view->assign("user_id", $user_id);
+            $user_name = $this->auth->username;
+            $this->view->assign("user_name", $user_name);
+            // user_name
             $this->MusicHouse();
         }else{
             Log::info('尚未登入');
@@ -49,7 +53,6 @@ class Music extends Frontend
         $list = $Houselist
             ->where($Houselist)
             ->select();
-
         $this->view->assign("list", $list);
         return $this->view->fetch();
     }

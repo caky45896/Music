@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\common\controller\Frontend;
+use think\log;
 
 class Index extends Frontend
 {
@@ -13,12 +14,15 @@ class Index extends Frontend
 
     public function index()
     {
-        // 這句的意思 等同於 select * from fa_shop ;
-        // $Shoplist = new \app\common\model\Shop(); 
+        $checklogin = $this->auth->isLogin();
+        $this->view->assign("checklogin", $checklogin);
 
-        // $getlist = $Shoplist->where($Shoplist)->select();
-
-        // $this->view->assign("getlist", $getlist);
+        if($this->auth->isLogin() == true){
+            Log::info('成功登入');
+            $user_name = $this->auth->username;
+            $this->view->assign("user_name", $user_name);
+            $this->view->assign("check", $checklogin);
+        }
 
         return $this->view->fetch();
     }

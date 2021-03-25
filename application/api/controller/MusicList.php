@@ -16,7 +16,6 @@ class MusicList extends Api
         $data = $this->request->param();
         Log::info("接收內容");
         Log::info($data);
-        Log::info("接收內容");
 
         $listdel = \app\common\model\MusicHouse::where('id', $data['id'])->find();
         $listdel->delete();
@@ -29,7 +28,6 @@ class MusicList extends Api
         $data = $this->request->param();
         Log::info("接收內容");
         Log::info($data);
-        Log::info("接收內容");
 
         $listadd = new \app\common\model\MusicHouse();
         $listadd->title = $data['title'];

@@ -18,7 +18,11 @@
 						<a href="{:url('music/index')}">Music</a>
 						<a href="{:url('about/index')}">{:__('About')}</a>
 						<a href="{:url('user/index')}">{:__('User center')}</a>
-						<a href="{:url('user/login')}"><button>登入</button></a>
+						{if $checklogin}
+						<span>您好，{$user_name}</span><a href="{:url('user/login')}"><button>登出</button></a>
+						{else /}
+						<a href="{:url('user/login')}"><button>Login in</button></a>
+						{/if}
 					</nav>
 				</div>
 				
@@ -96,12 +100,12 @@
 					<article class="alt">
 						<div class="content" style="text-align: center;">
 							<header>
-								<h3>Morbi interdum mol</h3>
+								<h3>備註</h3>
 							</header>
 							<div class="image fit">
 								<img src="__CDN__/assets/img/t2.jpg" alt="" />
 							</div>
-							<p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna ullamcorper vehicula. Integer adipiscin sem. Nullam quis massa sit amet lorem ipsum feugiat tempus.</p>
+							<p>登出(尚未有功能)</p>
 						</div>
 					</article>
 				</div>

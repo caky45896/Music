@@ -16,4 +16,5 @@
 2021/03/25
         Music - 從controller帶入username至view
         Music - 創建點歌房(創建、取消) - 等待上樣式
+        Music、About、index - 新增判斷是否登入, 如登入後顯示 [你好, XXX] 否則顯示登入
         
