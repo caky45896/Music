@@ -17,6 +17,7 @@
 						<a href="{:url('music/index')}">Music</a>
 						<a href="{:url('about/index')}">{:__('About')}</a>
 						<a href="{:url('user/index')}">{:__('User center')}</a>
+						<a href="{:url('user/login')}"><button>登入</button></a>
 					</nav>
 				</div>
 			</header>
@@ -26,28 +27,33 @@
 			<section id="main">
 				<div class="inner">
 					<header class="major special" >
-                        <h1>辦公室點歌系統</h1>
-						<button id="add">建立點歌房</button>
-						<h3>備註</h3>
-						<h6><span>刪除(尚未有功能)</span></h6>
-						<h6><span>建立點歌房(尚未有功能)</span></h6>
-					</header>
-					<!-- 暫時使用 房間清單-->
-						<div class="card mb-4">
-							<div class="card-body playlist">
-								<ul class="list-group list-group-flush" id="history"></ul>
-								{foreach name="list" id="row"}
-								<div id="musicList">
-									<div class="field half first">
-										<h4><p id="musicTitle">{$row.title}</p></h4>
-										<span>創建者: {$row.name}</span>
-										<button id="del" onclick="delMusic()">刪除</button>
-									</div>
-								</div>
-								<br>
-								{/foreach}
-							</div>
+						<h1>辦公室點歌系統</h1>
+						<div id="addDIV">
+							<button id="add" onclick="addINPUT()">建立點歌房</button>
 						</div>
+						<div>
+							<h3>備註</h3>
+							<h6>加入(尚未有功能)</h6>
+			
+						</div>
+					</header>
+					<table>
+						<thead>
+							<tr>
+								<th>房間名稱</th>
+								<th>創建人</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach name="list" id="row"}
+							<tr id="{$row.id}">
+								<td>{$row.title}</td>
+								<td>{$row.name}</td>
+								<td><button id="musicIn">加入</button> <button id="del" onclick="del('{$row.id}')">刪除</button></td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
 				</div>
 			</section>
 	
@@ -62,23 +68,102 @@
 			<!-- <script src="__CDN__/assets/js/util.js"></script> -->
 			<!-- <script src="__CDN__/assets/js/main.js"></script> -->
 			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+			
 	</body>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"  />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 	<script>
-	function setHistory(sHistory) {
-            $("#history").html("");
-            var oHistory = JSON.parse(sHistory);
-            var index = Math.floor(Math.random() * Object.keys(oHistory).length);
-            for (const [key, value] of Object.entries(oHistory)) {
-                var title1 = value.title;
-                if (title1.length > 43) {
-                    title1 = title1.slice(0, 40) + '...';
-                }
-                $("#history").append('<li class="list-group-item">' +
-                    '<button class="btn btn-info" type="button" onclick="add(\'' + value.id + '\',\'' + value.title + '\')">點播</button>\n' +
-                    '<button class="btn btn-warning" type="button" onclick="interstitial(\'' + value.id + '\',\'' + value.title + '\')">插播</button> - ' +
-                    title1 + '</li>');
-            }
-        }
+		toastr.options = {
+			// 參數設定[註1]
+			"closeButton": false, // 顯示關閉按鈕
+			"debug": false, // 除錯
+			"newestOnTop": false,  // 最新一筆顯示在最上面
+			"progressBar": true, // 顯示隱藏時間進度條
+			"positionClass": "toast-bottom-left", // 位置的類別
+			"preventDuplicates": false, // 隱藏重覆訊息
+			"onclick": null, // 當點選提示訊息時，則執行此函式
+			"showDuration": "300", // 顯示時間(單位: 毫秒)
+			"hideDuration": "1000", // 隱藏時間(單位: 毫秒)
+			"timeOut": "5000", // 當超過此設定時間時，則隱藏提示訊息(單位: 毫秒)
+			"extendedTimeOut": "1000", // 當使用者觸碰到提示訊息時，離開後超過此設定時間則隱藏提示訊息(單位: 毫秒)
+			"showEasing": "swing", // 顯示動畫時間曲線
+			"hideEasing": "linear", // 隱藏動畫時間曲線
+			"showMethod": "fadeIn", // 顯示動畫效果
+			"hideMethod": "fadeOut" // 隱藏動畫效果
+		}
+		// 成功
+		// toastr.success( "Success" );
+		// // 警告
+		// toastr.warning( "Warning" );
+		// // 失敗
+		// toastr.error( "Error" );
+	</script>
+	
+	<script>
+		// 刪除功能
+		function del(id)
+		{
+			var yes = confirm("確定刪除？");
+			if(yes == true){
+				$.ajax({
+				type: "POST",
+				url: "api/MusicList/MusicListDel",
+				data:{
+					'id': id
+				},
+				success: function(){
+					toastr.success("成功");
+					setTimeout("window.location.reload()", 3000);
+				},
+				error: function(){
+					toastr.error("失敗");
+				}
+				})
+			}else{
+				return false
+			}
+		}
 	</script>
 
+
+
+<!----------------------------------- 建立點歌房 ----------------------------------->
+	<script>
+		// 建立點歌房
+		function addINPUT(){
+			document.getElementById("addDIV").innerHTML='<button id="add">建立點歌房</button> <br>房間名稱：<input id="settitleText" type="text"  value="小夫, 我要進來了!" style="width: 300px;"><button id="setMusic" onclick="setMusic(title)">創建</button> <button id="musicno" onclick="musicNo()">取消</button>';
+		}
+	</script>
+	<script>
+		// 創建 點歌房
+		function setMusic(title){
+			var title = $("#settitleText").val();
+			if(title == ""){
+				toastr.warning("請輸入房間名稱");
+				
+			}else{
+				// 從controller 中帶過來的$user_id
+				var name = '<?php echo $user_id?>'
+				$.ajax({
+					type: 'POST',
+					url: "api/MusicList/MusicListAdd",
+					data: {
+						'title': $("#settitleText").val(),
+						'name': name
+					},
+					success: function(){
+						toastr.success("成功");
+						setTimeout("window.location.reload()",3000);
+					}
+				})
+			}
+		}
+	</script>
+	<script>
+		// 取消
+		function musicNo(){
+			document.getElementById("addDIV").innerHTML='<button id="add" onclick="addINPUT()">建立點歌房</button>';
+		}
+	</script>
 </html>

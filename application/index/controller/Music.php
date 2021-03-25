@@ -12,20 +12,26 @@ class Music extends Frontend
     protected $noNeedRight = '*';
     protected $layout = '';
 
+
+    
     public function index()
     {
+        // 判斷有沒有登入
+        // 沒登入給08去登入
+        // 登入之後 顯示現有房間
         Log::info('接收內容');
         Log::info('Login Status: ');
         Log::info($this->auth->isLogin());
 
         if($this->auth->isLogin() == true){
             Log::info('成功登入');
+            $user_id = $this->auth->username;
+            $this->view->assign("user_id", $user_id);
+            $this->MusicHouse();
         }else{
             Log::info('尚未登入');
             return $this->redirect('music/nologin');
         }
-
-        $this->MusicHouse();
         return $this->view->fetch();
     }
 
