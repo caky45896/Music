@@ -18,3 +18,6 @@
         Music - 創建點歌房(創建、取消) - 等待上樣式
         Music、About、index - 新增判斷是否登入, 如登入後顯示 [你好, XXX] 否則顯示登入
         
+2021/03/29
+        Music - 新增建立房間 增加token(md5)
+        Music、About、index - 新增登出功能
