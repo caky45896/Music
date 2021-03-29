@@ -18,7 +18,7 @@
 						<a href="{:url('about/index')}">{:__('About')}</a>
 						<a href="{:url('user/index')}">{:__('User center')}</a>
 						{if $checklogin}
-						<span>你好,  {$user_name} <input type="button" name="a" id="a" value="登出"></span>
+						<span>您好，{$user_name}</span><button id="sign_out" onclick="SignOut()">登出</button>
 						{else /}
 						<a href="{:url('user/login')}"><button>Login in</button></a>
 						{/if}
@@ -139,6 +139,21 @@
 						});
 					}
 				})
+			</script>
+			<script>
+				function SignOut(){
+					$.ajax({
+						type: "POST",
+						url: "api/User/logout",
+						success: function (){
+							toastr.success("成功登出");
+							setTimeout("window.location.reload()",3000);
+						},
+						error : function(){
+							toastr.error("失敗");
+						}
+					})
+				}
 			</script>
 	</body>
 </html>

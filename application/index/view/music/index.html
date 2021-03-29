@@ -18,7 +18,7 @@
 						<a href="{:url('about/index')}">{:__('About')}</a>
 						<a href="{:url('user/index')}">{:__('User center')}</a>
 						{if $checklogin}
-						<span>你好,  {$user_name} <input type="button" name="a" id="a" value="登出"></span>
+						<span>您好，{$user_name}</span><button id="sign_out" onclick="SignOut()">登出</button>
 						{else /}
 						<a href="{:url('user/login')}"><button>Login in</button></a>
 						{/if}
@@ -47,6 +47,7 @@
 								<th>房間名稱</th>
 								<th>創建人</th>
 								<th> </th>
+								<th>md5</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,7 +55,8 @@
 							<tr id="{$row.id}">
 								<td>{$row.title}</td>
 								<td>{$row.name}</td>
-								<td><button id="musicIn">加入</button> <button id="del" onclick="del('{$row.id}')">刪除</button></td>								
+								<td><button id="musicIn">加入</button> <button id="del" onclick="del('{$row.id}')">刪除</button></td>				
+								<td>{$row.token}</td>				
 							</tr>
 							{/foreach}
 						</tbody>
@@ -74,101 +76,138 @@
 			<!-- <script src="__CDN__/assets/js/main.js"></script> -->
 			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 			
-	</body>
 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"  />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-	<script>
-		toastr.options = {
-			// 參數設定[註1]
-			"closeButton": false, // 顯示關閉按鈕
-			"debug": false, // 除錯
-			"newestOnTop": false,  // 最新一筆顯示在最上面
-			"progressBar": true, // 顯示隱藏時間進度條
-			"positionClass": "toast-bottom-left", // 位置的類別
-			"preventDuplicates": false, // 隱藏重覆訊息
-			"onclick": null, // 當點選提示訊息時，則執行此函式
-			"showDuration": "300", // 顯示時間(單位: 毫秒)
-			"hideDuration": "1000", // 隱藏時間(單位: 毫秒)
-			"timeOut": "5000", // 當超過此設定時間時，則隱藏提示訊息(單位: 毫秒)
-			"extendedTimeOut": "1000", // 當使用者觸碰到提示訊息時，離開後超過此設定時間則隱藏提示訊息(單位: 毫秒)
-			"showEasing": "swing", // 顯示動畫時間曲線
-			"hideEasing": "linear", // 隱藏動畫時間曲線
-			"showMethod": "fadeIn", // 顯示動畫效果
-			"hideMethod": "fadeOut" // 隱藏動畫效果
-		}
-		// 成功
-		// toastr.success( "Success" );
-		// // 警告
-		// toastr.warning( "Warning" );
-		// // 失敗
-		// toastr.error( "Error" );
-	</script>
-	
-	<script>
-		// 點歌列表 - 刪除功能
-		function del(id)
-		{
-			var yes = confirm("確定刪除？");
-			if(yes == true){
-				$.ajax({
-				type: "POST",
-				url: "api/MusicList/MusicListDel",
-				data:{
-					'id': id
-				},
-				success: function(){
-					toastr.success("成功");
-					setTimeout("window.location.reload()", 3000);
-				},
-				error: function(){
-					toastr.error("失敗");
-				}
-				})
-			}else{
-				return false
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"  />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+		<script>
+			toastr.options = {
+				// 參數設定[註1]
+				"closeButton": false, // 顯示關閉按鈕
+				"debug": false, // 除錯
+				"newestOnTop": false,  // 最新一筆顯示在最上面
+				"progressBar": true, // 顯示隱藏時間進度條
+				"positionClass": "toast-bottom-left", // 位置的類別
+				"preventDuplicates": false, // 隱藏重覆訊息
+				"onclick": null, // 當點選提示訊息時，則執行此函式
+				"showDuration": "300", // 顯示時間(單位: 毫秒)
+				"hideDuration": "1000", // 隱藏時間(單位: 毫秒)
+				"timeOut": "5000", // 當超過此設定時間時，則隱藏提示訊息(單位: 毫秒)
+				"extendedTimeOut": "1000", // 當使用者觸碰到提示訊息時，離開後超過此設定時間則隱藏提示訊息(單位: 毫秒)
+				"showEasing": "swing", // 顯示動畫時間曲線
+				"hideEasing": "linear", // 隱藏動畫時間曲線
+				"showMethod": "fadeIn", // 顯示動畫效果
+				"hideMethod": "fadeOut" // 隱藏動畫效果
 			}
-		}
-	</script>
-
-
-
-<!----------------------------------- 建立點歌房 ----------------------------------->
-	<script>
-		// 建立點歌房
-		function addINPUT(){
-			document.getElementById("addDIV").innerHTML='<button id="add">建立點歌房</button> <br>房間名稱：<input id="settitleText" type="text" style="width: 300px;"><button id="setMusic" onclick="setMusic(title)">創建</button> <button id="musicno" onclick="musicNo()">取消</button>';
-		}
-	</script>
-	<script>
-		// 創建 點歌房
-		function setMusic(title){
-			var title = $("#settitleText").val();
-			if(title == ""){
-				toastr.warning("請輸入房間名稱");
-				
-			}else{
-				// 從controller 中帶過來的$user_name
-				var name = '<?php echo $user_name;?>'
-				$.ajax({
-					type: 'POST',
-					url: "api/MusicList/MusicListAdd",
-					data: {
-						'title': $("#settitleText").val(),
-						'name': name,
+			// 成功
+			// toastr.success( "Success" );
+			// // 警告
+			// toastr.warning( "Warning" );
+			// // 失敗
+			// toastr.error( "Error" );
+		</script>
+		
+		<script>
+			// 點歌列表 - 刪除功能
+			function del(id)
+			{
+				var yes = confirm("確定刪除？");
+				if(yes == true){
+					$.ajax({
+					type: "POST",
+					url: "api/MusicList/MusicListDel",
+					data:{
+						'id': id
 					},
 					success: function(){
 						toastr.success("成功");
+						setTimeout("window.location.reload()", 3000);
+					},
+					error: function(){
+						toastr.error("失敗");
+					}
+					})
+				}else{
+					return false
+				}
+			}
+		</script>
+
+
+
+	<!----------------------------------- 建立點歌房 ----------------------------------->
+		<script>
+			// 建立點歌房
+			function addINPUT(){
+				document.getElementById("addDIV").innerHTML='<button id="add">建立點歌房</button> <br>房間名稱：<input id="settitleText" type="text" style="width: 300px;"><button id="setMusic" onclick="setMusic(title)">創建</button> <button id="musicno" onclick="musicNo()">取消</button>';
+			}
+		</script>
+		<script>
+			function randomWord(randomFlag, min, max){ 
+				var str = "", range = min, 
+				// 字母，數字 
+				arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+				
+				if(randomFlag){
+					range = Math.round(Math.random() * (max-min)) + min; 
+				} 
+				for(var i=0; i<range; i++){
+					pos = Math.round(Math.random() * (arr.length-1)); str += arr[pos]; 
+					} 
+				return str; 
+			}
+
+
+			// 創建 點歌房
+			function setMusic(title){
+				var title = $("#settitleText").val();
+				if(title == ""){
+					toastr.warning("請輸入房間名稱");
+					
+				}else{
+					// 從controller 中帶過來的$user_name
+					var str = randomWord(false, 32);
+					console.log(str);
+					var name = '<?php echo $user_name;?>'
+					$.ajax({
+						type: 'POST',
+						url: "api/MusicList/MusicListAdd",
+						data: {
+							'title': $("#settitleText").val(),
+							'name': name,
+							'token': str
+						},
+						success: function(){
+							toastr.success("成功");
+							// setTimeout("window.location.reload()",3000);
+						},
+						error: function(){
+							toastr.error("失敗");
+						}
+					})
+				}
+			}
+		</script>
+		<script>
+			// 取消
+			function musicNo(){
+				document.getElementById("addDIV").innerHTML='<button id="add" onclick="addINPUT()">建立點歌房</button>';
+			}
+		</script>
+
+		<script>
+			function SignOut(){
+				$.ajax({
+					type: "POST",
+					url: "api/User/logout",
+					success: function (){
+						toastr.success("成功登出");
 						setTimeout("window.location.reload()",3000);
+					},
+					error : function(){
+						toastr.error("失敗");
 					}
 				})
 			}
-		}
-	</script>
-	<script>
-		// 取消
-		function musicNo(){
-			document.getElementById("addDIV").innerHTML='<button id="add" onclick="addINPUT()">建立點歌房</button>';
-		}
-	</script>
+		</script>
+	</body>
 </html>

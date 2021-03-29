@@ -32,6 +32,7 @@ class MusicList extends Api
         $listadd = new \app\common\model\MusicHouse();
         $listadd->title = $data['title'];
         $listadd->name = $data['name'];
+        $listadd->token = $data['token'];
         $listadd->save();
 
         $this->success('請求成功');

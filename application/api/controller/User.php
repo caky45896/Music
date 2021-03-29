@@ -133,7 +133,7 @@ class User extends Api
     public function logout()
     {
         $this->auth->logout();
-        $this->success(__('Logout successful'));
+        $this->success(__('Logout successful'), url('/'));
     }
 
     /**
