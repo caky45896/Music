@@ -104,7 +104,7 @@ return [
     'Donation'                                               => '捐赠',
     'Forum'                                                  => '社区',
     'Docs'                                                   => '文档',
-    'User center'                                            => '会员中心',
+    'User center'                                            => '會員中心',
     'Change password'                                        => '修改密码',
     'Please login first'                                     => '请登录后再操作',
     'Uploaded successful'                                    => '上传成功',
@@ -144,4 +144,5 @@ return [
     'ProductDesciption'                                      => '商品介紹',
     'About'                                                  => '關於我們',
     'Home'                                                   => '首頁',
+    'Music'                                                  => '點歌系統'
 ];

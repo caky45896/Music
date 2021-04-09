@@ -1,51 +1,16 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>{:__('CompanyName')}</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="__CDN__/assets/css/main.css" />
-	</head>
-	<body>
+{include file="layout/music_header"  keywords="Music"}
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="{:url('/')}" class="logo">Music</a>
-					<nav id="nav">
-						<a href="{:url('/')}">{:__('Home')}</a>
-						<a href="{:url('music/index')}">Music</a>
-						<a href="{:url('about/index')}">{:__('About')}</a>
-						<a href="{:url('user/index')}">{:__('User center')}</a>
-						<a href="{:url('user/login')}"><button>Login in</button></a>
-					</nav>
-				</div>
-			</header>
-			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-
-		<!-- Main -->
-			<section id="main">
-				<div class="inner">
-					<header class="major special" >
-					</header>
-					<div>
-						<h3>您尚未登入, 請先登入！</h3>
-						<ul class="actions">
-							<li><a href="{:url('user/login')}" class="button alt">登入</a></li>
-						</ul>
-					</div>
-				</div>                
+<!-- Main -->
+<section id="main">
+	<div class="inner">
+		<header class="major special" >
+		</header>
+		<div>
+			<h3>您尚未登入, 請先登入！</h3>
+			<ul class="actions">
+				<li><a href="{:url('user/login')}" class="button alt">登入</a></li>
+			</ul>
+		</div>
+	</div>                
 	
-
-
-			<!-- Scripts -->
-			<script src="__CDN__/assets/libs/jquery/dist/jquery.min.js"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
-			<script src="__CDN__/assets/js/jquery.min.js"></script>
-			<script src="__CDN__/assets/js/browser.min.js"></script>
-			<script src="__CDN__/assets/js/breakpoints.min.js"></script>
-			<script src="__CDN__/assets/js/util.js"></script>
-			<script src="__CDN__/assets/js/main.js"></script>
-			<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-	</body>
-</html>
+{include file="layout/music_footer"}

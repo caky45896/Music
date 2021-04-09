@@ -23,14 +23,19 @@ class Music extends Frontend
         Log::info('Login Status: ');
         Log::info($this->auth->isLogin());
 
+        // 取得登入狀態
         $checklogin = $this->auth->isLogin();
         $this->view->assign("checklogin", $checklogin);
+
+        // 取得房間狀態
+        $status = $this->auth->music_status;
+        $this->view->assign("status", $status);
         
         if($this->auth->isLogin() == true){
             Log::info('成功登入');
             $user_name = $this->auth->username;
+            // 取得用戶username
             $this->view->assign("user_name", $user_name);
-            // user_name
             $this->MusicHouse();
         }else{
             Log::info('尚未登入');
@@ -39,12 +44,6 @@ class Music extends Frontend
         return $this->view->fetch();
     }
 
-    // 尚未登入的頁面
-    public function nologin()
-    {
-
-        return $this->view->fetch();
-    }
 
     // 顯示現有的房間
     public function MusicHouse(){
@@ -54,6 +53,13 @@ class Music extends Frontend
             ->where($Houselist)
             ->select();
         $this->view->assign("list", $list);
+        return $this->view->fetch();
+    }
+    // 尚未登入的頁面
+    public function nologin()
+    {
+        $checklogin = $this->auth->isLogin();
+        $this->view->assign("checklogin", $checklogin);
         return $this->view->fetch();
     }
 }

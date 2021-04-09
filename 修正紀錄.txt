@@ -19,5 +19,33 @@
         Music、About、index - 新增判斷是否登入, 如登入後顯示 [你好, XXX] 否則顯示登入
         
 2021/03/29
+    前台:
         Music - 新增建立房間 增加token(md5)
         Music、About、index - 新增登出功能
+    後台:
+        SQL - 新增點歌房時 修改music_status = 1 /  刪除點歌房時 修改music_status = 0
+
+2021/04/07
+!修正被點出的問題!
+    前台:
+    
+        Music、About、index -
+            將重複的內容 集中至view/layout (music_footer 、 music_header 、 music_script )
+            開頭打上 "{include file="layout/music_header"  keywords="Music"}"  keywords 帶入參數
+            在music_header中 修改 "<a href="{:url('/')}" class="logo">[keywords]</a>"
+        
+        Music - 將MD5拿掉, 移至後台
+        Music - 新增 判斷 music_status是否為1, 為1彈出warning視窗, 為0才能正常建立房間
+        Music、About、index - 將進度條顯示拿掉, 改為1秒後刷新
+
+        nologin - 修正路由
+
+    後台:
+        Music - 在後台 使用時間戳 產生md5 為 token使用
+
+
+
+待辦事項:
+    1.把md5變成 房間網址, 之後把md5欄位拿掉
+    2.是自己建立的房間, 才有刪除按鈕
+    3.加入功能尚未建立

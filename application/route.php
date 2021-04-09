@@ -13,6 +13,7 @@
 use think\Route;
 Route::get('about', 'about/index');
 Route::get('music', 'music/index');
+Route::get('nologin', 'music/nologin');
 return [
     //别名配置,别名只能是映射到控制器且访问时必须加上请求的方法
     '__alias__'   => [

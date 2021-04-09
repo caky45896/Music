@@ -20,12 +20,14 @@ class About extends Frontend
         可以滿足客戶的各種不同需求！";
         $this->view->assign('getText', $settext);
         
+        // 取得狀態
         $checklogin = $this->auth->isLogin();
         $this->view->assign("checklogin", $checklogin);
         
         if($this->auth->isLogin() == true){
             Log::info('成功登入');
             $user_name = $this->auth->username;
+            // 取得用戶username
             $this->view->assign("user_name", $user_name);
             $this->view->assign("check", $checklogin);
         }

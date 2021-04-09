@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{:__('CompanyName')}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="__CDN__/assets/css/main.css"/>
+</head>
+<body>
+<header id="header">
+    <div class="inner">
+        <a href="{:url('/')}" class="logo">[keywords]</a>
+        <nav id="nav">
+            <a href="{:url('/')}">{:__('Home')}</a>
+            <a href="{:url('music/index')}">{:__('Music')}</a>
+            <a href="{:url('about/index')}">{:__('About')}</a>
+            <a href="{:url('user/index')}">{:__('User center')}</a>
+            {if $checklogin}
+            <span>您好，{$user_name}</span><button id="sign_out" onclick="SignOut()">登出</button>
+            {else /}
+            <a href="{:url('user/login')}"><button>Login in</button></a>
+            {/if}
+
+        </nav>
+    </div>
+</header>
+<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
