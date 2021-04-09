@@ -27,7 +27,10 @@
 							<tr id="{$row.id}">
 								<td id="music_title">{$row.title}</td>
 								<td id="music_name">{$row.name}</td>
-								<td><button id="musicIn">加入</button> <button id="del" onclick="del('{$row.id}')">刪除</button></td>				
+								<td>
+									<button id="musicIn"><a href="/music/musicRoom/{$row.token}" target="_blank">加入</a></button>
+									<button id="del" onclick="del('{$row.id}')">刪除</button>
+								</td>
 								<td>{$row.token}</td>				
 							</tr>
 							{/foreach}
@@ -90,12 +93,14 @@
 				}else{
 					// 從controller 中帶過來的$user_name
 					var name = '<?php echo $user_name;?>'
+					var user_id = '<?php echo $user_id;?>'
 					$.ajax({
 						type: 'POST',
 						url: "api/MusicList/MusicListAdd",
 						data: {
 							'title': $("#settitleText").val(),
 							'name': name,
+							'user_id': user_id,
 							'status': 1
 						},
 						success: function(){

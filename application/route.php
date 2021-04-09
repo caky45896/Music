@@ -12,6 +12,7 @@
 
 use think\Route;
 Route::get('about', 'about/index');
+Route::get('music/musicRoom/:uuid', 'music/musicRoom');
 Route::get('music', 'music/index');
 Route::get('nologin', 'music/nologin');
 return [

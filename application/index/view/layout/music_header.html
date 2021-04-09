@@ -16,7 +16,7 @@
             <a href="{:url('about/index')}">{:__('About')}</a>
             <a href="{:url('user/index')}">{:__('User center')}</a>
             {if $checklogin}
-            <span>您好，{$user_name}</span><button id="sign_out" onclick="SignOut()">登出</button>
+            <span>您好，{$user_name}</span><a><button id="sign_out" onclick="SignOut()">登出</button></a>
             {else /}
             <a href="{:url('user/login')}"><button>Login in</button></a>
             {/if}

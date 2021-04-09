@@ -43,7 +43,15 @@
     後台:
         Music - 在後台 使用時間戳 產生md5 為 token使用
 
+2021/04/09
+    前台:
+        Music - 新增加入功能 網址為music/musicRoom/(token)
 
+    後台:
+        Music - 新增、刪除 修正用user_id做判斷
+        
+    資料庫修正:
+         fa_musichouse 新增格 user_id(由fa_user帶入)
 
 待辦事項:
     1.把md5變成 房間網址, 之後把md5欄位拿掉

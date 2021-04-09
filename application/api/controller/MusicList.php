@@ -18,12 +18,12 @@ class MusicList extends Api
         Log::info($data);
 
         // 在user表找到username 修改music_status狀態
-        $music_status = \app\common\model\User::where('username', $data['name'])->find();
+        $music_status = \app\common\model\User::where('id', $this->auth->id)->find();
         $music_status->music_status = $data['status'];
         $music_status->save();
 
-        // 透過$row.id 與資料庫相同 刪除
-        $listdel = \app\common\model\MusicHouse::where('id', $data['id'])->find();
+        // 透過user_id 跟 使用者id
+        $listdel = \app\common\model\MusicHouse::where('user_id', $this->auth->id)->find();
         $listdel->delete();
 
 
@@ -31,6 +31,7 @@ class MusicList extends Api
     }
     public function MusicListAdd()
     {
+
         // 新增
         $data = $this->request->param();
         Log::info("接收內容");
@@ -41,13 +42,15 @@ class MusicList extends Api
         $listadd = new \app\common\model\MusicHouse();
         $listadd->title = $data['title'];
         $listadd->name = $data['name'];
+        $listadd->user_id = $data['user_id'];
         $listadd->token = $token;
         $listadd->save();
 
         // 在user表找到username 修改music_status狀態
-        $music_status = \app\common\model\User::where('username', $data['name'])->find();
+        $music_status = \app\common\model\User::where('id', $this->auth->id)->find();
         $music_status->music_status = $data['status'];
         $music_status->save();
         $this->success('請求成功');
     }
+
 }

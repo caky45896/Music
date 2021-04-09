@@ -1,0 +1,9 @@
+{include file="layout/music_header"  keywords="MusicRoom"}
+
+<ul class="list-group">
+    <li class="list-group-item">room_id : {$room_id}</li>
+    <li class="list-group-item">是否是管理者 : {if $is_admin==1}是{else}否{/if}</li>
+</ul>
+
+{include file="layout/music_script"}
+{include file="layout/music_footer"}
