@@ -1,9 +1,33 @@
 {include file="layout/music_header"  keywords="MusicRoom"}
-
-<ul class="list-group">
-    <li class="list-group-item">room_id : {$room_id}</li>
-    <li class="list-group-item">是否是管理者 : {if $is_admin==1}是{else}否{/if}</li>
-</ul>
-
+<section id="main">
+    <div class="inner">
+        <!-- 之後修改 -->
+        <ul class="list-group">
+            <li class="list-group-item">room_id : {$room_id}</li>
+            <li class="list-group-item">是否是管理者 : {if $is_admin==1}是{else}否{/if}</li>
+        </ul>
+        <header class="major special">
+            <h1 >播放中</h1>
+            <article>
+                <div class="content" style="text-align: center;">
+                    <br>
+                    <div style="background-color: black;">
+                        <h3>Youbute畫面</h3>
+                    </div>
+                </div>
+            </article>
+            <hr>
+        </header>
+    
+        <div>
+            <div style="background-color: darkgrey; position: absolute;width: 20%;">
+                <h3>左</h3>
+            </div>
+            <div style="background-color: darkgrey; position: absolute; right: 280px; width: 20%; height: 100%;">
+                <h3>右</h3>
+            </div>
+        </div>
+    </div>
+    
 {include file="layout/music_script"}
 {include file="layout/music_footer"}

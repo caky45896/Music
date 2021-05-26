@@ -41,19 +41,34 @@
         nologin - 修正路由
 
     後台:
-        Music - 在後台 使用時間戳 產生md5 為 token使用
+        Music - 在後台使用時間戳產生md5為token使用
 
 2021/04/09
     前台:
-        Music - 新增加入功能 網址為music/musicRoom/(token)
-
+        Music - 新增加入功能, 網址為music/musicRoom/(token)
     後台:
-        Music - 新增、刪除 修正用user_id做判斷
-        
+        Music - 新增、刪除, 修正用user_id做判斷
     資料庫修正:
-         fa_musichouse 新增格 user_id(由fa_user帶入)
+         fa_musichouse新增格user_id(由fa_user帶入)
+
+2021/04/13
+    前台:
+        Music - 新增判斷是否為自己創建的房間,是的話才顯示出"刪除"按鈕
+        將controller中的index、Music、About "$this->view->assign"刪除不必要的變數
 
 待辦事項:
-    1.把md5變成 房間網址, 之後把md5欄位拿掉
-    2.是自己建立的房間, 才有刪除按鈕
-    3.加入功能尚未建立
+    1.加入後顯示內容
+    2.刪除伊瑞納斯 還我U質統神台
+
+
+------------------------------------------
+
+升等經驗值上限+5 5/10/15/25/30....
+
+Exp [ 10/15 ]
+黃延崇Lv.3
+依照完成幾項內容 獲得多少經驗值
+獲得經驗值紀錄:
+                之前的所有 +25 Exp
+
+------------------------------------------

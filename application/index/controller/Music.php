@@ -12,36 +12,26 @@ class Music extends Frontend
     protected $noNeedRight = '*';
     protected $layout = '';
 
-
     public function index()
     {
-        // 判斷有沒有登入
-        // 沒登入給08去登入
-        // 登入之後 顯示現有房間
         Log::info('接收內容');
-        Log::info('Login Status: ');
-        Log::info($this->auth->isLogin());
+        Log::info('Log: 登入狀態 0:否 1:是,  當前狀態:'. $this->auth->isLogin());
 
-        // 取得登入狀態
-        $checklogin = $this->auth->isLogin();
-        $this->view->assign("checklogin", $checklogin);
 
-        // 取得房間狀態
-        $status = $this->auth->music_status;
-        $this->view->assign("status", $status);
+        $this->view->assign("checklogin", $this->auth->isLogin()); // 取得登入狀態
+        $this->view->assign("status", $this->auth->music_status); // 取得房間狀態
 
         if ($this->auth->isLogin() == true) {
-            Log::info('成功登入');
-            $user_name = $this->auth->username;
-            $user_id = $this->auth->id;
-            // 取得用戶username
-            $this->view->assign("user_name", $user_name);
-            $this->view->assign("user_id", $user_id);
+            Log::info("Log: 用戶 " . $this->auth->username . " 成功登入");
+            $this->view->assign("user_name", $this->auth->username); // 取得用戶username
+            $this->view->assign("auth_id", $this->auth->id); // 給index 創建點歌房的api-'user_id'使用
             $this->MusicHouse();
         } else {
-            Log::info('尚未登入');
+            Log::info("Log: 用戶未登入");
             return $this->redirect('music/nologin');
         }
+        
+        
         return $this->view->fetch();
     }
 
@@ -49,37 +39,33 @@ class Music extends Frontend
     // 顯示現有的房間
     public function MusicHouse()
     {
-        $checklogin = $this->auth->isLogin();
-        $this->view->assign("checklogin", $checklogin);
-        
+        $this->view->assign("checklogin", $this->auth->isLogin());
+
         $MusicHouse = new \app\common\model\MusicHouse();
-
         $list = $MusicHouse
-            ->select();
-
+        ->select();
         $this->view->assign("list", $list);
+
         return $this->view->fetch();
     }
 
     // 尚未登入的頁面
     public function nologin()
     {
-        $checklogin = $this->auth->isLogin();
-        $this->view->assign("checklogin", $checklogin);
+        $this->view->assign("checklogin", $this->auth->isLogin());
         return $this->view->fetch();
     }
 
-    // 顯示現有的房間
+    // 房間頁面
     public function musicRoom($uuid)
     {
         // 取得登入狀態
-        $checklogin = $this->auth->isLogin();
-        $this->view->assign("checklogin", $checklogin);
+        $this->view->assign("checklogin", $this->auth->isLogin());
 
         $MusicHouse = new \app\common\model\MusicHouse();
 
         $oMusicHouse = $MusicHouse
-        ->where('user_id', $this->auth->username)
+        ->where('name', $this->auth->username)
         ->where('token', $uuid)
         ->find();
 

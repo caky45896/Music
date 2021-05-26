@@ -9,7 +9,7 @@
 						</div>
 						<div>
 							<h3>備註</h3>
-							<h6>加入(尚未有功能)</h6>
+							<h6>加入後 頁面建立</h6>
 			
 						</div>
 					</header>
@@ -19,7 +19,6 @@
 								<th>房間名稱</th>
 								<th>創建用戶</th>
 								<th>功能</th>
-								<th>token</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -27,11 +26,16 @@
 							<tr id="{$row.id}">
 								<td id="music_title">{$row.title}</td>
 								<td id="music_name">{$row.name}</td>
+								{if $row.user_id==$auth_id}
 								<td>
-									<button id="musicIn"><a href="/music/musicRoom/{$row.token}" target="_blank">加入</a></button>
+									<a href="/music/musicRoom/{$row.token}" target="_blank"><button id="musicIn">加入</button></a>
 									<button id="del" onclick="del('{$row.id}')">刪除</button>
 								</td>
-								<td>{$row.token}</td>				
+								{else/}
+								<td>
+									<a href="/music/musicRoom/{$row.token}" target="_blank"><button id="musicIn">加入</button></a>
+								</td>
+								{/if}
 							</tr>
 							{/foreach}
 						</tbody>
@@ -45,7 +49,7 @@
 			function del(id)
 			{
 				var yes = confirm("確定刪除？");
-				var name = '<?php echo $user_name;?>'
+				var name = '<?php echo $user_name;?>';
 				if(yes == true){
 					$.ajax({
 					type: "POST",
@@ -77,7 +81,7 @@
 			function addINPUT(){
 				var status = "<?php echo $status;?>";
 				if(status == 1){
-					toastr.warning("您已建立過房間!");
+					toastr.warning("您已建立過房間");
 				}else{
 					document.getElementById("addDIV").innerHTML='<button id="add">建立點歌房</button> <br>房間名稱：<input id="settitleText" type="text" value="" style="width: 300px;"><button id="setMusic" onclick="setMusic(title)">創建</button> <button id="musicno" onclick="musicNo()">取消</button>';
 				}
@@ -92,15 +96,16 @@
 					
 				}else{
 					// 從controller 中帶過來的$user_name
+					// 將auth_id 帶至 MusicHouse表格中的user_id欄位
 					var name = '<?php echo $user_name;?>'
-					var user_id = '<?php echo $user_id;?>'
+					var id = '<?php echo $auth_id;?>'
 					$.ajax({
 						type: 'POST',
 						url: "api/MusicList/MusicListAdd",
 						data: {
 							'title': $("#settitleText").val(),
 							'name': name,
-							'user_id': user_id,
+							'user_id': id,
 							'status': 1
 						},
 						success: function(){

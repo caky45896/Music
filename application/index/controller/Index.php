@@ -15,15 +15,15 @@ class Index extends Frontend
     public function index()
     {
         // 取得登入狀態
-        $checklogin = $this->auth->isLogin();
-        $this->view->assign("checklogin", $checklogin);
+        $this->view->assign("checklogin", $this->auth->isLogin());
+        Log::info($this->auth->isLogin());
 
         if($this->auth->isLogin() == true){
-            Log::info('成功登入');
-            $user_name = $this->auth->username;
-            // 取得用戶username
-            $this->view->assign("user_name", $user_name);
-            $this->view->assign("check", $checklogin);
+            Log::info("Log: 用戶" . $this->auth->username . ", 成功登入");
+            $this->view->assign("user_name", $this->auth->username);
+            $this->view->assign("check", $this->auth->isLogin());
+        }else{
+            Log::info("Log: 用戶未登入");
         }
 
         return $this->view->fetch();
