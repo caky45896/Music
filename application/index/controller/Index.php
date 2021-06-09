@@ -8,7 +8,7 @@ use think\log;
 class Index extends Frontend
 {
 
-    protected $noNeedLogin = '*';
+    protected $noNeedLogin = ['*'];
     protected $noNeedRight = '*';
     protected $layout = '';
 
@@ -28,5 +28,4 @@ class Index extends Frontend
 
         return $this->view->fetch();
     }
-
 }

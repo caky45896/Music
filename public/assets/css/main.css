@@ -1960,6 +1960,7 @@
 			box-shadow: inset 0 0 0 2px #e5474b;
 			color: #e5474b !important;
 		}
+		
 
 			input[type="submit"].alt:hover,
 			input[type="reset"].alt:hover,
@@ -2531,6 +2532,7 @@
 
 		@media screen and (max-width: 480px) {
 
+			
 			section .inner {
 				max-width: 90%;
 				width: 90%;
@@ -3959,19 +3961,3 @@
 		}
 
 /* 自訂css */
-		#musicList{
-			background-color: rgb(161, 161, 161);
-			width: 400px;
-			color: #000000;
-		}
-
-		.controlList{
-			background-color: #484848;
-		}
-
-		.controlDiv{
-			width: 100px;
-			height: 100px;
-			position:absolute;
-			right:50%;
-		}

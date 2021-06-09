@@ -7,7 +7,7 @@ use think\log;
 
 class MusicList extends Api
 {
-    protected $noNeedLogin = ['*'];
+    protected $noNeedLogin = [''];
     protected $noNeedRight = ['*'];
 
     public function MusicListDel()
@@ -52,5 +52,4 @@ class MusicList extends Api
         $music_status->save();
         $this->success('請求成功');
     }
-
 }

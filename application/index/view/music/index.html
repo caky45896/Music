@@ -125,20 +125,4 @@
 				document.getElementById("addDIV").innerHTML='<button id="add" onclick="addINPUT()">建立點歌房</button>';
 			}
 		</script>
-
-		<script>
-			function SignOut(){
-				$.ajax({
-					type: "POST",
-					url: "api/User/logout",
-					success: function (){
-						toastr.success("成功登出");
-						setTimeout("window.location.reload()",1000);
-					},
-					error : function(){
-						toastr.error("失敗");
-					}
-				})
-			}
-		</script>
 {include file="layout/music_footer"}

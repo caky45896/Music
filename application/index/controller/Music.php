@@ -8,9 +8,8 @@ use think\Log;
 class Music extends Frontend
 {
 
-    protected $noNeedLogin = '*';
-    protected $noNeedRight = '*';
-    protected $layout = '';
+    protected $noNeedLogin = ['*'];
+    protected $noNeedRight = ['*'];
 
     public function index()
     {
@@ -39,6 +38,7 @@ class Music extends Frontend
     // 顯示現有的房間
     public function MusicHouse()
     {
+        $noNeedLogin = [''];
         $this->view->assign("checklogin", $this->auth->isLogin());
 
         $MusicHouse = new \app\common\model\MusicHouse();
@@ -59,18 +59,33 @@ class Music extends Frontend
     // 房間頁面
     public function musicRoom($uuid)
     {
+        $noNeedLogin = [''];
         // 取得登入狀態
         $this->view->assign("checklogin", $this->auth->isLogin());
 
         $MusicHouse = new \app\common\model\MusicHouse();
+        
 
         $oMusicHouse = $MusicHouse
         ->where('name', $this->auth->username)
         ->where('token', $uuid)
         ->find();
 
+        $RoomLists = new \app\common\model\RoomList();
+        $RoomList = $RoomLists
+        ->where('room_token', $uuid)
+        ->select();
+
+        // 房間名稱
+        $title_MusicHouse = $MusicHouse
+        ->where('name', $this->auth->username)
+        ->find();
+
+        $this->view->assign("room_title", $title_MusicHouse['title']);
         $this->view->assign("is_admin", !empty($oMusicHouse));
+        $this->view->assign("user_token", $this->auth->getToken());
         $this->view->assign("user_name", $this->auth->username);
+        $this->view->assign("room_arr", $RoomList);
         $this->view->assign("room_id", $uuid);
         return $this->view->fetch();
     }
